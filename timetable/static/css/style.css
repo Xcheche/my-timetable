@@ -1,0 +1,33 @@
+/* Add this CSS to your stylesheet */
+
+@keyframes expand {
+    from {
+        width: 150px;
+    }
+    to {
+        width: 300px;
+    }
+}
+
+@keyframes shrink {
+    from {
+        width: 300px;
+    }
+    to {
+        width: 150px;
+    }
+}
+
+form.d-flex input[type="search"] {
+    width: 150px;
+    transition: width 0.5s ease-in-out;
+}
+
+form.d-flex input[type="search"]:focus {
+    width: 300px;
+    animation: expand 0.5s forwards;
+}
+
+form.d-flex input[type="search"]:blur {
+    animation: shrink 0.5s forwards;
+}

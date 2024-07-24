@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<h1>Time Table</h1>
+<table class="table">
+  <thead>
+    <tr>
+        {% if todos %}
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Favorite</th>
+      <th scope="col">Month</th>
+     <th scope="col">Day</th>
+      <th>Completed</th>
+      <th>Add</th>
+      <th>View</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        {% for todo in todos %}
+      <th scope="row">{{ todo.id }}</th>
+      <td>{{ todo.title }}</td>
+      <td>{{ todo.favorite }}</td>
+      <td>{{ todo.month }}</td>
+      <td>{{ todo.day }}</td>
+      <td>{{ todo.completed }}</td>
+      <td><a href="{% url 'add'  %}">Add</a></td>
+      <td><a href="{% url 'details' todo.id %}">View</a></td>
+      <td><a href="{% url 'update' todo.id %}">Update</a></td>
+      <td><a href="{% url 'delete' todo.id %}">Delete</a></td>
+    </tr>
+
+    {% endfor %}
+    {% else %}
+    <p>No todos yet</p>
+    {% endif %}
+    
+    
+  </tbody>
+</table>
+
+{% endblock %}
