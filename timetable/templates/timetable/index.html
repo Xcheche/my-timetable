@@ -31,10 +31,10 @@
       <td>{{ todo.month }}</td>
       <td>{{ todo.day }}</td>
       <td>{{ todo.completed }}</td>
-      <td><a href="{% url 'add'  %}">Add</a></td>
-      <td><a href="{% url 'details' todo.id %}">View</a></td>
-      <td><a href="{% url 'update' todo.id %}">Update</a></td>
-      <td><a href="{% url 'delete' todo.id %}">Delete</a></td>
+      <td><a href="{% url 'add'  %}" class="btn btn-success btn-sm"><i class="bi bi-plus-square"></i> Add</a></td>
+      <td><a href="{% url 'details' todo.id %}" class="btn btn-primary btn-sm"><i class="bi bi-view-list"></i> View</a></td>
+      <td><a href="{% url 'update' todo.id %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Update</a></td>
+      <td><a href="{% url 'delete' todo.id %}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>Delete</a></td>
     </tr>
 
     {% endfor %}
@@ -43,5 +43,17 @@
     
   </tbody>
 </table>
+
+ <div class="pagination mt-5 d-flex justify-content-center">
+        {% if todos.has_previous %}
+        <a href="?page={{ todos.previous_page_number }}" class="page-link mx-3 rounded-pill "> Previous</a>
+        {% endif %}
+
+  <h3>Page {{ todos.number }} of {{ todos.paginator.num_pages }}</h3>
+
+        {% if todos.has_next %}
+        <a href="?page={{ todos.next_page_number }}" class="page-link ms-3 rounded-pill"> Next</a>
+        {% endif %}
+    </div>
 
 {% endblock %}
