@@ -8,7 +8,7 @@
 <table class="table">
   <thead>
     <tr>
-        {% if todos %}
+     
       <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Favorite</th>
@@ -23,6 +23,7 @@
   </thead>
   <tbody>
     <tr>
+     
         {% for todo in todos %}
       <th scope="row">{{ todo.id }}</th>
       <td>{{ todo.title }}</td>
@@ -37,9 +38,7 @@
     </tr>
 
     {% endfor %}
-    {% else %}
-    <p>No todos yet</p>
-    {% endif %}
+ 
     
     
   </tbody>

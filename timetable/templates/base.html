@@ -30,8 +30,9 @@
             </ul>
           </div>
         
-             <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+             <form class="d-flex" role="search" method="POST" action="{% url 'search' %}">
+              {% csrf_token %}
+      <input class="form-control me-2" type="search" name="output" placeholder="Search..." aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
     </form>
         </div>
@@ -43,7 +44,7 @@
     <div class="footer  mt-5 text-center">
         <footer>
             <p>&copy; 2023 Time Table Cheche. All Rights Reserved. <br>
-                <small>Powered by Django</small>
+                <small>Made with ❤️ Powered by Django</small>
             </p>
         </footer>
     </div>

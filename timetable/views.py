@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from timetable.forms import TodoForm
@@ -61,18 +62,23 @@ def delete(request, id):
 
 
 #search functionality
-# views.py
-
-
 def search(request):
-    query = request.GET.get('query', '').strip()
-    results = []
-    if 'query' in request.GET:
-        query = request.GET['query']
-        print(f"Search query: {query}") 
-        results = Todo.objects.filter(
-            Q(title__icontains=query) | Q(description__icontains=query) | Q(month__icontains=query) | Q(day__icontains=query))
+    if request.method == "POST":
+        search = request.POST.get('output')
+        todos = Todo.objects.all()  # Initial queryset containing all records
         
-    print(f"Results: {results}")
-    
-    return render(request, 'timetable/search.html', {'results': results, 'query': query})
+        if search:
+            todos = todos.filter(Q(title__icontains=search) |
+                                     Q(description__icontains=search) |
+                                     Q(favorite__icontains=search) |
+                                     Q(day__icontains=search) |
+                                     Q(month__icontains=search)|
+                                     Q(completed__icontains=search)|
+                                     Q(id__icontains=search))
+        
+        if not todos.exists():
+            return HttpResponse("No results found matching the search criteria.")
+        
+        return render(request, "timetable/index.html", {"todos": todos})
+    else:
+        return HttpResponse("An error occurred")
